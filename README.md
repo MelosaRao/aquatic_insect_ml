@@ -20,9 +20,11 @@ Please direct any questions or comments regarding this work to Heili Lowman at h
 5. The user can download everything to their machine by running fifth code block. The includes `output_summary.csv`, `detailed_predictions.csv`, `coco_annotations.json`, `results` folder and the `annotated_output.jpg`.
 6. The sixth code block resets the variables for new image inference
 
----
--The `yolo11-p2_FineTuned_binary_detection.ipynb (mAp0.81)`  has the code for training our Final Binary Detector, we used YOLOX11-p2  this specific architecture of yolo is designed specifically for small object detection and we used a pretrained version on COCO dataset as this will save the training time, we used SAHI SF algorithm and augmentation with some modifcations to the hyperparameters to make the model have more training samples and get to learn more from the small dataset we have this improved the model's accuracy and boost recall (to 0.87), we also used SAHI for inference as this also made our detections more accurate 
+## Training
+- Inorder to replicate the training process for YOLO please consider `yolo11-p2_FineTuned_binary_detection.ipynb`
+- Inorder to replicate the training processs for Resnet please conside `Resnet_Label_Smoothing_Confidence_Thresholding.ipynb` or `Resnet_with_77images_and_label_smoothing.ipynb` in the Resnet Classification folder
 
+---
 - The `YOLO-Segmentation (mAP0.6)` folder stores the results and the script to run yolo segmentation on our dataset. Note that for segmentation purposes all instances were labeled as insects and they will be classified using a seperate model
 
     - `yolo_segment_s.ipnyb` stores the script to run segmentation on the dataset with yolov8s model. This model acheived an mAP of rougly 0.6 on validation test and 0.58 on testing set
@@ -33,5 +35,10 @@ Please direct any questions or comments regarding this work to Heili Lowman at h
 - The `Resnet Classification Folder` stores the scripts and best weights for insect classication using the resnet model
 
     - The `Resnet_tensorflow_intial_version.ipynb` contains the script to augment images of all classes except dipteran to 400 images. We then performed used Resnet model for classification. This acheives 0.89 testing accuracy. Confusion matrix shows that model is good at predict most classes with 'other' being the sole exception (the model performs very poorely on the other class).
-    - The `Resnet_Label_Smoothing_Confidence_Thresholding.ipynb` contains the script to  augment images of all classes except dipteran to 400 images. We one hot encode the labels and perform label smoothing by a factor of 0.1. The helps reduce model overconfidence about wrong prediction. Example: Class 2 -> one hot encoded: [0, 0, 1, 0, 0, 0] -> label smoothing [0.02, 0.02, 0.9, 0.02, 0.02]. We also visualised confidence of predicts and experimented with various confidence threshold.
+    - The `Resnet_Label_Smoothing_Confidence_Thresholding.ipynb` contains the script to  augment images of all classes except dipteran to 400 images. We one hot encode the labels and perform label smoothing by a factor of 0.1. The helps reduce model overconfidence about wrong prediction. Example: Class 2 -> one hot encoded: [0, 0, 1, 0, 0, 0] -> label smoothing [0.02, 0.02, 0.9, 0.02, 0.02]. We also visualised confidence of predicts and experimented with various confidence threshold.\
+    - We acheived an highest of 91% accuracy with 27 images and 86% weight accuracy when it was trained on a diverse set of 77 images with thresholding and smoothing applied
+
+## Model Recommender System
+The notebook provides the framework for a recommender system to choose between a newer model (with more recent data) and a older model, using a Recommender Agent, Langchain and genai. Please use your own google api key. You can also change the LLM as you prefer.
+
 
